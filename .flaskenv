@@ -1,2 +1,1 @@
-FLASK_APP=api_feature_switch
-FLASK_ENV=development
+FLASK_APP=run
