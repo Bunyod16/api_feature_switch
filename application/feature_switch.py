@@ -1,32 +1,47 @@
 from flask import request
+from .models import ResponseBody, User
 from application import mongo_client
-import json
 
+def get_feature(email, feature_name):
+    if (email == None or feature_name == None):
+        return ResponseBody({'status':422, 'json':{'error':'Missing required parameters email/featureName'}})
+    user = User(email)
+    if (user.doc == None):
+        return ResponseBody({'status':404, 'json':{'error':'User not found'}})
+    if (feature_name in user.doc.get('features')):
+        return ResponseBody({'status':200, 'json':{"canAccess":True}})
+    return ResponseBody({'status':200, 'json':{"canAccess":False}})
+    
 
-class ResponseBody():
-    def __init__(self, args):
-        self.status = args['status']
-        self.json = json.dumps(args['json'])
+def post_feature(email, feature_name, enable):
+    email = request.args.get('email')
+    feature_name = request.args.get('featureName')
+    enable = request.args.get('enable')
 
-def get_feature(*args):
-    email = args('email')
-    featureName = args('featureName')
+    if (email == None or feature_name == None or enable == None):
+        return ResponseBody({'status':304, 'message':'Status Not Modified (304)'})
+    
+    user = User(email)
+    if (user.doc == None):
+        return ResponseBody({'status':404, 'json':{'error':'User not found'}})
+    try:
+        enable = enable.lower()
+        features = user.doc.get('features')
+        if (features == None):
+            if (enable == 'true'):
+                features = [feature_name]
+            else:
+                features = []
+        elif (enable == 'true' and feature_name not in features):
+            features.append(feature_name)
+        elif (enable == 'false' and feature_name in features):
+            features.remove(feature_name)
 
-    if (email == None or featureName == None):
-        return ResponseBody({'status':422, 'json':{'error':'missing required parameters email/featureName'}})
-    return ResponseBody({'status':200, 'json':{'canAccess':'True'}})
-
-def post_feature(*args):
-    email = args('email')
-    featureName = args('featureName')
-    enable = args('enable')
-
-
-    if (email == None or featureName == None or enable == None):
-        return ResponseBody({'status':422, 'json':{'error':'missing required parameters email/featureName/enable'}})
-    user_collection = mongo_client.db.users
-    q = user_collection.find({'email':email})
-    return ResponseBody({'status':200, 'json':{'message':'ok'}})
+        user.update({"$set": {"features": features}})
+        return ResponseBody({'status':200, 'message':'OK (200)'})
+    except Exception as err:
+        print(err)
+        return ResponseBody({'status':304, 'message':'Status Not Modified (304)'})
 
 def post_account(*args):
     email = request.args.get('email')
