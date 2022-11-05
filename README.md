@@ -25,6 +25,18 @@ Request body:
 Response: 200, OK
 ```
 
+## Set up
+1.  Requirements: Python 3.10 or later
+2.  Navigate to root directory
+3. Create a virtual environment
+   - `python3 -m venv venv`
+   - `source venv/bin/activate`
+4. Install dependencies
+   - `pip install -r requirements.txt`
+5. Set up a .env file, follow .env_sample 
+6. Launch API
+   - `python3 run.py`
+
 ## Unit tests
 
 ### ChangeFeatureAccessTest: `POST` -> `/feature`
