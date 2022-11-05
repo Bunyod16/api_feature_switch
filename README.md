@@ -62,7 +62,7 @@
 <br />
 
 ## <b>Unit tests
-
+### To launch unit tests use `python3 -m unittest`
 ### ChangeFeatureAccessTest: `POST` -> `/feature`
 ```
 - test_correct_disable (test_feature_switch.PostFeatureTest) ... ok
