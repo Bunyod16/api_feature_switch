@@ -1,6 +1,4 @@
-from flask import request
 from .models import ResponseBody, User
-from application import mongo_client
 
 def get_feature(email, feature_name):
     if (email == None or feature_name == None):
