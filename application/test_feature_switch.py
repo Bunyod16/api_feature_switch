@@ -37,7 +37,19 @@ class PostFeatureTest(unittest.TestCase):
         self.assertEqual(r.status_code, 304)
     
     def test_missing_enable(self):
-        r = requests.post(self.FEATURE_URL, json={"featureName": self.test_feature, "email":self.test_email, })
+        r = requests.post(self.FEATURE_URL, json={"featureName": self.test_feature, "email":self.test_email})
+        self.assertEqual(r.status_code, 304)
+    
+    def test_wrong_feature_name_data_type(self):
+        r = requests.post(self.FEATURE_URL, json={"featureName":999, "email":self.test_email, "enable":True})
+        self.assertEqual(r.status_code, 304)
+    
+    def test_wrong_email_data_type(self):
+        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":999, "enable":True})
+        self.assertEqual(r.status_code, 304)
+
+    def test_wrong_enable_data_type(self):
+        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":999, "enable":"True"})
         self.assertEqual(r.status_code, 304)
 
 class GetFeatureTest(unittest.TestCase):
