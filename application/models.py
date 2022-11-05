@@ -18,5 +18,5 @@ class User():
     
     def update(self, command):
         user_collection = mongo_client.db.users
-        r = user_collection.update_one({'_id':self.doc._id}, command, upsert=False)
+        r = user_collection.update_one({'_id':self.doc.get("_id")}, command, upsert=False)
         return (r)

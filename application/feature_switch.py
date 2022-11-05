@@ -8,7 +8,7 @@ def get_feature(email, feature_name):
     user = User(email)
     if (user.doc == None):
         return ResponseBody({'status':404, 'json':{'error':'User not found'}})
-    if (feature_name in user.doc.get('features')):
+    if (user.doc.get('features') != None and feature_name in user.doc.get('features')):
         return ResponseBody({'status':200, 'json':{"canAccess":True}})
     return ResponseBody({'status':200, 'json':{"canAccess":False}})
     
