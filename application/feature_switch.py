@@ -14,10 +14,6 @@ def get_feature(email, feature_name):
     
 
 def post_feature(email, feature_name, enable):
-    email = request.args.get('email')
-    feature_name = request.args.get('featureName')
-    enable = request.args.get('enable')
-
     if (email == None or feature_name == None or enable == None):
         return ResponseBody({'status':304, 'message':'Status Not Modified (304)'})
     
@@ -25,16 +21,15 @@ def post_feature(email, feature_name, enable):
     if (user.doc == None):
         return ResponseBody({'status':404, 'json':{'error':'User not found'}})
     try:
-        enable = enable.lower()
         features = user.doc.get('features')
         if (features == None):
-            if (enable == 'true'):
+            if (enable == True):
                 features = [feature_name]
             else:
                 features = []
-        elif (enable == 'true' and feature_name not in features):
+        elif (enable == True and feature_name not in features):
             features.append(feature_name)
-        elif (enable == 'false' and feature_name in features):
+        elif (enable == False and feature_name in features):
             features.remove(feature_name)
 
         user.update({"$set": {"features": features}})
