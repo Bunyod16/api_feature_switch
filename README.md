@@ -51,7 +51,7 @@ curl --header "Content-Type: application/json" \
 
 <br />
 
-## <b>Set up
+## <b>Manual set up
 
 1. Requirements: Python 3.6 or later
 2. Navigate to root directory
