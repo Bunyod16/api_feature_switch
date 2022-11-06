@@ -1,6 +1,12 @@
 # <b>API-FEATURE-SWITCH
 
 #### This REST API is created to enable/disable feature flags for individual users
+
+<ul>
+ <li>Framework: Python/Flask</li>
+ <li>Database:  MongoDB</li>
+ <li>Deployment: Google Cloud Run</li> 
+</ul>
 <br />
 
 ## <b>Examples
