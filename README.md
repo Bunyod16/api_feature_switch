@@ -16,7 +16,7 @@ Get Feature Access :
 curl -X GET http://127.0.0.1:5000/feature\?email=user1@gmail.com\&featureName=insta-cash
 ```
 
-```json
+```
    Response:
    {
       "canAccess":false
