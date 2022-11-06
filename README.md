@@ -1,4 +1,4 @@
-# <b>API-FEATURE-SWITCH
+# <b>API-FEATURE-SWITCH🦁
 
 #### This REST API is created to enable/disable feature flags for individual users
 
@@ -46,8 +46,13 @@ curl --header "Content-Type: application/json" \
 <br />
 
 ## <b> Container
-#### Launch the API in a containerised environment `docker compose up`
-###### note: use <b>port 5555</b> to communicate with the container as configured in the docker-compose or change it to port any unused port
+<ol>
+<li>Change MONGO-URI in .env (connection string sent via email)
+</li>
+<li>Launch the API in a containerised environment `docker compose up`</li>
+</ol>
+
+##### note: use <b>port 5555</b> to communicate with the container as configured in the docker-compose or change it to port any unused port
 
 <br />
 
@@ -60,7 +65,7 @@ curl --header "Content-Type: application/json" \
    - `source venv/bin/activate`
 4. Install dependencies
    - `pip install -r requirements.txt`
-5. Change MONGO-URI in .env (connection string sent in email)
+5. Change MONGO-URI in .env (connection string sent via email)
 6. Launch API
    - `flask run`
 
