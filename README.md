@@ -11,7 +11,7 @@
 
 ## <b>Examples
 
-  Get Feature Access :
+Get Feature Access :
 ```
 curl -X GET http://127.0.0.1:5000/feature\?email=user1@gmail.com\&featureName=insta-cash
 ```
@@ -43,6 +43,12 @@ curl --header "Content-Type: application/json" \
 |    `email`           |    `features`  |   
 | -------------------- | -------------- |
 | exampleuser@mail.com | ['insta-cash'] |
+<br />
+
+## <b> Container
+#### Launch the API in a containerised environment `docker compose up`
+###### note: use <b>port 5555</b> to communicate with the container as configured in the docker-compose or change it to port any unused port
+
 <br />
 
 ## <b>Set up
