@@ -72,7 +72,8 @@ curl --header "Content-Type: application/json" \
 <br />
 
 ## <b>Unit tests
-### To launch unit tests use `python3 -m unittest -v tests/test_feature_switch.py`
+### Configure `API_URL` in `tests/test_feature_switch.py`
+### Launch unit tests `python3 -m unittest -v tests/test_feature_switch.py`
 ### ChangeFeatureAccessTest: `POST` -> `/feature`
 ```
 - test_bad_email (test_feature_switch.PostFeatureTest) ... ok
