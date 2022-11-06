@@ -50,7 +50,7 @@
 
 1.  Requirements: Python 3.10 or later
 2.  Navigate to root directory
-3. Create a virtual environment
+3. Create and activate virtual environment
    - `python3 -m venv venv`
    - `source venv/bin/activate`
 4. Install dependencies
@@ -62,7 +62,7 @@
 <br />
 
 ## <b>Unit tests
-### To launch unit tests use `python3 -m unittest`
+### To launch unit tests use `python3 -m unittest -v tests/test_feature_switch.py`
 ### ChangeFeatureAccessTest: `POST` -> `/feature`
 ```
 - test_correct_disable (test_feature_switch.PostFeatureTest) ... ok
