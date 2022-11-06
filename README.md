@@ -11,7 +11,7 @@
 
 ## <b>Examples
 
-* Get Feature Access : `GET /feature?email=user1@gmail.comfeatureName=insta-cash`
+* Get Feature Access : `GET /feature?email=user1@gmail.com&featureName=insta-cash`
 
 ```
    Response:
@@ -38,14 +38,14 @@
 ## <b>Database
 ### The database of choice <b>MongoDB</b>, consist of a collection of users with a `features` array that contains *enabled* features
 
-| `email`          |    `features`  |   
-| ---------------- | -------------- |
-| user1@mail.com   | ['insta-cash'] |
+|    `email`           |    `features`  |   
+| -------------------- | -------------- |
+| exampleuser@mail.com | ['insta-cash'] |
 <br />
 
 ## <b>Set up
 
-1.  Requirements: Python 3.10 or later
+1.  Requirements: Python 3.6 or later
 2.  Navigate to root directory
 3. Create and activate virtual environment
    - `python3 -m venv venv`
