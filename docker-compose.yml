@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  api-feature-switch:
+    build: .
+    ports:
+      - "5555:5000"
+    environment:
+      PORT: 5000
+      MONGO_URI: ${MONGO_URI}

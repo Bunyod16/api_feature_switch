@@ -11,25 +11,27 @@
 
 ## <b>Examples
 
-* Get Feature Access : `GET /feature?email=user1@gmail.com&featureName=insta-cash`
-
+  Get Feature Access :
 ```
+curl -X GET http://127.0.0.1:5000/feature\?email=user1@gmail.com\&featureName=insta-cash
+```
+
+```json
    Response:
    {
-      "canAccess":true
+      "canAccess":false
    }
 ```
 
-* Change Feature Access : `POST /feature`
+  Modify Feature Access :
+```
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"featureName":"crypto-trading","email":"user1@gmail.com","enable":true}' \
+  http://127.0.0.1:5000/feature
+```
 
 ```
-   Request body:
-   {
-      "featureName": "crypto-trading"
-      "email": "user1@gmail.com"
-      "enable": true
-   }
-
    Response: 200, OK
 ```
 
@@ -45,14 +47,14 @@
 
 ## <b>Set up
 
-1.  Requirements: Python 3.6 or later
-2.  Navigate to root directory
+1. Requirements: Python 3.6 or later
+2. Navigate to root directory
 3. Create and activate virtual environment
    - `python3 -m venv venv`
    - `source venv/bin/activate`
 4. Install dependencies
    - `pip install -r requirements.txt`
-5. Set up a .env file, follow .env_sample 
+5. Change MONGO-URI in .env (connection string sent in email)
 6. Launch API
    - `flask run`
 
