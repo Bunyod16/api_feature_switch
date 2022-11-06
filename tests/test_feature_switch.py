@@ -1,6 +1,8 @@
 import requests
 import unittest
+from dotenv import load_dotenv
 
+load_dotenv()
 class PostFeatureTest(unittest.TestCase):
     API_URL = "http://127.0.0.1:5000"
     FEATURE_URL = f"{API_URL}/feature"
