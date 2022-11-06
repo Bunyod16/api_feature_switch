@@ -4,5 +4,5 @@ docker-compose.yml
 Dockerfile
 
 #unittests
-test/
+tests/
 dev-requirements.txt
