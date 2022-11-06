@@ -1,6 +1,12 @@
 # <b>API-FEATURE-SWITCH
 
 #### This REST API is created to enable/disable feature flags for individual users
+
+<ul>
+ <li>Framework: Python/Flask</li>
+ <li>Database:  MongoDB</li>
+ <li>Deployment: Google Cloud Run</li> 
+</ul>
 <br />
 
 ## <b>Examples
@@ -30,20 +36,11 @@
 <br />
 
 ## <b>Database
-### The database of choice <b>MongoDB</b>, it consist of 9 test users with an uninitalised `features` array
+### The database of choice <b>MongoDB</b>, consist of a collection of users with a `features` array that contains *enabled* features
 
-| `email`          |  `features`  |   
-| ---------------- | ------------ |
-| user1@gmail.com  |              |
-| user2@gmail.com  |              |
-| user3@gmail.com  |              |
-| user4@gmail.com  |              |
-| user5@gmail.com  |              |
-| user6@gmail.com  |              |
-| user7@gmail.com  |              |
-| user8@gmail.com  |              |
-| user9@gmail.com  |              |
-
+| `email`          |    `features`  |   
+| ---------------- | -------------- |
+| user1@mail.com   | ['insta-cash'] |
 <br />
 
 ## <b>Set up
@@ -57,7 +54,7 @@
    - `pip install -r requirements.txt`
 5. Set up a .env file, follow .env_sample 
 6. Launch API
-   - `python3 run.py`
+   - `flask run`
 
 <br />
 
@@ -65,11 +62,14 @@
 ### To launch unit tests use `python3 -m unittest -v tests/test_feature_switch.py`
 ### ChangeFeatureAccessTest: `POST` -> `/feature`
 ```
+- test_bad_email (test_feature_switch.PostFeatureTest) ... ok
+- test_bad_email2 (test_feature_switch.PostFeatureTest) ... ok
+- test_bad_email3 (test_feature_switch.PostFeatureTest) ... ok
 - test_correct_disable (test_feature_switch.PostFeatureTest) ... ok
 - test_correct_enable (test_feature_switch.PostFeatureTest) ... ok
 - test_missing_email (test_feature_switch.PostFeatureTest) ... ok
 - test_missing_enable (test_feature_switch.PostFeatureTest) ... ok
-- test_missing_featureName (test_feature_switch.PostFeatureTest) ... ok
+- test_missing_feature_name (test_feature_switch.PostFeatureTest) ... ok
 - test_wrong_email_data_type (test_feature_switch.PostFeatureTest) ... ok
 - test_wrong_enable_data_type (test_feature_switch.PostFeatureTest) ... ok
 - test_wrong_feature_name_data_type (test_feature_switch.PostFeatureTest) ... ok
@@ -77,6 +77,9 @@
 
 ### GetFeatureAccessTest: `GET` -> `/feature`
 ```
+- test_bad_email1 (test_feature_switch.GetFeatureTest) ... ok
+- test_bad_email2 (test_feature_switch.GetFeatureTest) ... ok
+- test_bad_email3 (test_feature_switch.GetFeatureTest) ... ok
 - test_correct (test_feature_switch.GetFeatureTest) ... ok
 - test_correct2 (test_feature_switch.GetFeatureTest) ... ok
 - test_missing_email (test_feature_switch.GetFeatureTest) ... ok

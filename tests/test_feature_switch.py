@@ -94,7 +94,7 @@ class GetFeatureTest(unittest.TestCase):
         self.assertEqual(len(r.json()), 1)
 
     def test_missing_email(self):
-        r = requests.get(f"{self.FEATURE_URL}?featureName=cryptoTrading", timeout=1)
+        r = requests.get(f"{self.FEATURE_URL}?featureName=crypto-trading", timeout=1)
         self.assertEqual(r.status_code, 422)
         self.assertEqual(len(r.json()), 1)
 
@@ -102,3 +102,15 @@ class GetFeatureTest(unittest.TestCase):
         r = requests.get(f"{self.FEATURE_URL}?email=user1@gmail.com", timeout=1)
         self.assertEqual(r.status_code, 422)
         self.assertEqual(len(r.json()), 1)
+
+    def test_bad_email1(self):
+        r = requests.get(f"{self.FEATURE_URL}?email=badmail.com&featureName=insta-cash", timeout=1)
+        self.assertEqual(r.status_code, 422)
+    
+    def test_bad_email2(self):
+        r = requests.get(f"{self.FEATURE_URL}?email=bad@mail&featureName=insta-cash", timeout=1)
+        self.assertEqual(r.status_code, 422)
+
+    def test_bad_email3(self):
+        r = requests.get(f"{self.FEATURE_URL}?email=badmail&featureName=insta-cash", timeout=1)
+        self.assertEqual(r.status_code, 422)

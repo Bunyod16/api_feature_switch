@@ -17,6 +17,8 @@ def validate_email(email):
 def get_feature(email, feature_name):
     if (email == None or feature_name == None):
         return jsonify({'message':'Error missing required parameters email/featureName'}), 422
+    if (not validate_email(email)):
+        return jsonify({'message':'Error malformed email'}), 422
     user = User(email)
     if (feature_name in user.doc.get('features')):
         return jsonify({'canAccess':True}), 200
