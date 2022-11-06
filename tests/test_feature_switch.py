@@ -1,5 +1,5 @@
-import requests
 import unittest
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,19 +32,19 @@ class PostFeatureTest(unittest.TestCase):
     def test_missing_feature_name(self):
         r = requests.post(self.FEATURE_URL, json={"email":self.test_email, "enable":False}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_missing_email(self):
         r = requests.post(self.FEATURE_URL, json={"featureName": self.test_feature, "enable":False}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_missing_enable(self):
         r = requests.post(self.FEATURE_URL, json={"featureName": self.test_feature, "email":self.test_email}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_wrong_feature_name_data_type(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":999, "email":self.test_email, "enable":True}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_wrong_email_data_type(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":999, "enable":True}, timeout=1)
         self.assertEqual(r.status_code, 304)
@@ -52,15 +52,15 @@ class PostFeatureTest(unittest.TestCase):
     def test_wrong_enable_data_type(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":self.test_email, "enable":"True"}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_bad_email(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":"badmail@gmail", "enable":False}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_bad_email2(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":"@gmail.com", "enable":True}, timeout=1)
         self.assertEqual(r.status_code, 304)
-    
+
     def test_bad_email3(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":"badmail.com", "enable":False}, timeout=1)
         self.assertEqual(r.status_code, 304)
@@ -106,7 +106,7 @@ class GetFeatureTest(unittest.TestCase):
     def test_bad_email1(self):
         r = requests.get(f"{self.FEATURE_URL}?email=badmail.com&featureName=insta-cash", timeout=1)
         self.assertEqual(r.status_code, 422)
-    
+
     def test_bad_email2(self):
         r = requests.get(f"{self.FEATURE_URL}?email=bad@mail&featureName=insta-cash", timeout=1)
         self.assertEqual(r.status_code, 422)
