@@ -38,7 +38,7 @@ curl --header "Content-Type: application/json" \
 <br />
 
 ## <b>Database
-### The database of choice <b>MongoDB</b>, consist of a collection of users with a **features** array that contains *enabled* features
+#### The database of choice **MongoDB**, consist of a collection of users with a **features** array that contains *enabled* features
 
 |    email           |    features  |   
 | -------------------- | -------------- |
