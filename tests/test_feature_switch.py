@@ -12,7 +12,7 @@ class PostFeatureTest(unittest.TestCase):
     def test_correct_enable(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":self.test_email, "enable":True}, timeout=1)
         self.assertEqual(r.status_code, 200)
-        self.assertIn("OK", r.text)
+        self.assertEqual("OK", r.json())
         r = requests.get(f"{self.FEATURE_URL}?featureName={self.test_feature}&email={self.test_email}", timeout=1)
         self.assertEqual(r.status_code, 200)
         self.assertEqual(len(r.json()), 1)
@@ -22,7 +22,7 @@ class PostFeatureTest(unittest.TestCase):
     def test_correct_disable(self):
         r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":self.test_email, "enable":False}, timeout=1)
         self.assertEqual(r.status_code, 200)
-        self.assertIn("OK", r.text)
+        self.assertEqual("OK", r.json())
         r = requests.get(f"{self.FEATURE_URL}?featureName={self.test_feature}&email={self.test_email}", timeout=1)
         self.assertEqual(r.status_code, 200)
         self.assertEqual(len(r.json()), 1)
@@ -50,7 +50,19 @@ class PostFeatureTest(unittest.TestCase):
         self.assertEqual(r.status_code, 304)
 
     def test_wrong_enable_data_type(self):
-        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":999, "enable":"True"}, timeout=1)
+        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":self.test_email, "enable":"True"}, timeout=1)
+        self.assertEqual(r.status_code, 304)
+    
+    def test_bad_email(self):
+        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":"badmail@gmail", "enable":False}, timeout=1)
+        self.assertEqual(r.status_code, 304)
+    
+    def test_bad_email2(self):
+        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":"@gmail.com", "enable":True}, timeout=1)
+        self.assertEqual(r.status_code, 304)
+    
+    def test_bad_email3(self):
+        r = requests.post(self.FEATURE_URL, json={"featureName":self.test_feature, "email":"badmail.com", "enable":False}, timeout=1)
         self.assertEqual(r.status_code, 304)
 
 class GetFeatureTest(unittest.TestCase):
@@ -61,14 +73,14 @@ class GetFeatureTest(unittest.TestCase):
         r = requests.get(f"{self.FEATURE_URL}?featureName=creditScore&email=user1@gmail.com", timeout=1)
         self.assertEqual(r.status_code, 200)
         self.assertEqual(len(r.json()), 1)
-        self.assertEqual(list(r.json()), ["canAccess"])
+        self.assertIn("canAccess", r.json())
         self.assertIn(r.json()["canAccess"], [True, False])
 
     def test_correct2(self):
         r = requests.get(f"{self.FEATURE_URL}?featureName=cryptoInvesting&email=user2@gmail.com", timeout=1)
         self.assertEqual(r.status_code, 200)
         self.assertEqual(len(r.json()), 1)
-        self.assertEqual(list(r.json()), ["canAccess"])
+        self.assertIn("canAccess", r.json())
         self.assertIn(r.json()["canAccess"], [True, False])
 
     def test_unused_parameter(self):
