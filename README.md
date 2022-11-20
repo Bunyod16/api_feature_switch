@@ -64,7 +64,7 @@ curl --header "Content-Type: application/json" \
    - `python3 -m venv venv`
    - `source venv/bin/activate`
 4. Install dependencies
-   - `pip install -r requirements.txt`
+   - `pip install -r dev-requirements.txt`
 5. Change MONGO-URI in .env (connection string sent via email)
 6. Launch API
    - `flask run`
